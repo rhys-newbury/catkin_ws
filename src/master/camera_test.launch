@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="launch_prefix" default=""/>
+	<include file="$(find realsense2_camera)/launch/rs_camera.launch" />
+	
+	<node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan">
+		<param name="scan_height" value="3"/>
+		<param name="range_min" value="0.5" />
+		<param name="output_frame_id" value="camera_link" />
+		<remap from="image" to="/camera/depth/image_rect_raw"/>
+   		<remap from="camera_info" to="/camera/depth/camera_info"/>
+  	</node>
+
+	<node pkg="2dnav" type="line_follower.py" name="2dnav" />
+	<node pkg="rotateBack" type="rotate.py" name="rotateBack" />
+	<node pkg="cv_camera" type="cv_camera_node" name="cv_camera">
+	<param name="/device_id" value="0" />
+	</node>
+	<node  pkg="sound_play" type="soundplay_node.py" name="sound_play" />
+	<node pkg="take_picture" type="take_picture_node.py" name="take_picture" />
+	<node pkg="image_process" type="image_process.py" name="image_process" />
+	
+
+</launch>
+
+
