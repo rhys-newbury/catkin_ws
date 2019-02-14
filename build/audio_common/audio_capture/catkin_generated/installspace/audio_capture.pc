@@ -1,0 +1,8 @@
+prefix=/home/rhys/catkin_ws/install
+
+Name: audio_capture
+Description: Description of audio_capture
+Version: 0.3.3
+Cflags: 
+Libs: -L/home/rhys/catkin_ws/install/lib 
+Requires: 

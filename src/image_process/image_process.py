@@ -48,14 +48,14 @@ class TakePicture():
 			
 			#cv2_image = cv2.cvtColor(cv2_image,cv2.COLOR_BGR2RGB)
 	 	'''	
-		self.current.publish('starting to upload')
-		storage_client = storage.Client()
+		#self.current.publish('starting to upload')
+		#storage_client = storage.Client()
 
-		bucket = storage_client.get_bucket('monash-robot-photos')
-    		blob = bucket.blob(first.split("/")[-1])
-		converted = cv2.imencode('.jpg', cv2_image)[1].tostring()
-		blob.upload_from_string(converted)
-		self.current.publish('uploaded!!')
+		#bucket = storage_client.get_bucket('monash-robot-photos')
+    		#blob = bucket.blob(first.split("/")[-1])
+		#converted = cv2.imencode('.jpg', cv2_image)[1].tostring()
+		#blob.upload_from_string(converted)
+		#self.current.publish('uploaded!!')
 		
 
 

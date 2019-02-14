@@ -1,0 +1,8 @@
+prefix=/home/rhys/catkin_ws/install
+
+Name: rotateBack
+Description: Description of rotateBack
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/rhys/catkin_ws/install/lib 
+Requires: 

@@ -1,0 +1,8 @@
+prefix=/home/rhys/catkin_ws/devel
+
+Name: take_picture
+Description: Description of take_picture
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/rhys/catkin_ws/devel/lib 
+Requires: 

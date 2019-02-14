@@ -1,0 +1,2 @@
+2dnav:audio_common/audio_capture:audio_common/audio_common:audio_common/audio_common_msgs:audio_common/audio_play:audio_common/sound_play:cv_camera:depthimage_to_laserscan:image_process:realsense/ddynamic_reconfigure:realsense/realsense2_camera:rotateBack:take_picture
+-DCATKIN_DEVEL_PREFIX=/home/rhys/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/rhys/catkin_ws/install -G Unix Makefiles

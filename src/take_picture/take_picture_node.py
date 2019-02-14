@@ -80,8 +80,11 @@ class TakePicture():
 		self.current.publish("got a factor")
 		#try:
 		self.camera.trigger_capture(self.context)
-		self.return_pub.publish(self.factor)		
+		
+		self.return_pub.publish(self.factor)	
+		time.sleep(0.5)
 		pics = self.list_files(self.camera)
+		self.current.publish(str(pics))	
 		image_list = []
 		for path in pics:
 
@@ -89,20 +92,30 @@ class TakePicture():
 			dest = "/home/rhys/folder/" + name
 
 			camera_file = gp.check_result(gp.gp_camera_file_get(self.camera, folder, name, gp.GP_FILE_TYPE_NORMAL))
-
-			gp.check_result(gp.gp_file_save(camera_file, dest))
-			image_list.append(name)
+			try:
+				gp.check_result(gp.gp_file_save(camera_file, dest))
+				image_list.append(name)
+				self.image_pub.publish(dest)
+			except:
+				try:
+					gp.check_result(gp.gp_file_save(camera_file, dest))
+					image_list.append(name)
+					self.image_pub.publish(dest)
+				except:
+					pass
+				
+			
 			gp.check_result(gp.gp_camera_file_delete(self.camera, folder, name))
 
 
 		
-			self.image_pub.publish(dest)
+			
 
-		storage_client = storage.Client()
-		bucket = storage_client.get_bucket('monash-robot-files')
-		blob = bucket.blob("files_" + str(timeit.default_timer()))
-		converted = str(image_list)
-		blob.upload_from_string(converted)
+		#storage_client = storage.Client()
+		#bucket = storage_client.get_bucket('monash-robot-files')
+		#blob = bucket.blob("files_" + str(timeit.default_timer()))
+		#converted = str(image_list)
+		#blob.upload_from_string(converted)
 
 		gp.check_result(gp.gp_camera_exit(self.camera))
 		self.camera, self.context = self.refresh_camera()
@@ -135,6 +148,8 @@ class TakePicture():
 		node.set_value(20)
 		node = config.get_child_by_name("capturemode")
 		node.set_value('Burst')
+		node = config.get_child_by_name("capturetarget")
+		node.set_value('Memory card')
 		camera.set_config(config, context) 
 
 		return camera, context
